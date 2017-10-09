@@ -2,7 +2,7 @@
 
 class GetTradeAPI
 {
-    // public and secret key ( still for info & trade & deposits), CHANGE before use
+    // public and secret key ( still for info & trade & deposits), CHANGE before USE
     protected $key = '6377975XD4B4411551058D877CFEECD9';
     protected $secret = 'ff1bc3dd1da1Z8819981e0eeba7c4c55';
 
@@ -17,7 +17,7 @@ class GetTradeAPI
             'nonce' => $nonce
         ];
 
-        $curl = curl_init(); //инициализация сеанса
+        $curl = curl_init();
 
         curl_setopt($curl, CURLOPT_URL, 'https://yobit.net/tapi/');
         curl_setopt($curl, CURLOPT_HTTPHEADER, [
