@@ -1,49 +1,48 @@
 <?php
+namespace yobit\net\php\api\src;
 
 class NonceCounter
 {
     private $DS = '/';
-    protected $filename, $file, $handle;
+    protected
+        $filename,
+        $file,
+        $handle;
 
-    public function index() {
+    public function __construct() {
 
         $DS = $this->DS;
         $res = '';
-        $filename = __DIR__ . $DS . "nonce.txt";
+        $this->filename = "nonce.txt";
 
-        if (file_exists($filename))
-        {
+        if (file_exists($this->filename)) {
 
-            $file = file_get_contents($filename, FILE_USE_INCLUDE_PATH);
+            $this->file = file_get_contents($this->filename, FILE_USE_INCLUDE_PATH);
 
-            if(strlen((int)$file) <= 10)
-            {
+            if(strlen((int)$this->file) <= 10) {
 
-                if ((int)$file === 2147483646 || (int)$file > 2147483646)
-                {
+                if ((int)$this->file === 2147483646 || (int)$this->file > 2147483646) {
                     echo 'No valid key anymore';
                     exit;
+
+                } else {
+                    $res = ((int)$this->file)+1;
+                    $this->handle = fopen($this->filename, "w+b");
+                    fwrite($this->handle, $res);
+                    fclose($this->handle);
                 }
-                else
-                {
-                    $res = ((int)$file)+1;
-                    $handle = fopen($filename, "w+b");
-                    fwrite($handle, $res);
-                    fclose($handle);
-                }
-            }
-            else
-            {
+
+            } else {
                 echo 'Something wrong with file length';
                 exit;
             }
-        }
-        else
-        {
+
+        } else {
+
             $res = '1';
-            $handle = fopen($filename, "w+b");
-            fwrite($handle, '1');
-            fclose($handle);
+            $this->handle = fopen($this->filename, "w+b");
+            fwrite($this->handle, '1');
+            fclose($this->handle);
         }
 
         return $res;

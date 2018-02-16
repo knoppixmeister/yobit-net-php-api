@@ -1,10 +1,17 @@
 <?php
+namespace yobit\net\php\api\src;
 
 class GetTradeAPI
 {
     // public and secret key ( still for info & trade & deposits), CHANGE before USE
-    protected $key = '6377975XD4B4411551058D877CFEECD9';
-    protected $secret = 'ff1bc3dd1da1Z8819981e0eeba7c4c55';
+    protected $key;
+    protected $secret;
+
+    public function __construct($key, $secret)
+    {
+        $this->key = $key;
+        $this->secret = $secret;
+    }
 
     public function queryInit($method, $params=null)
     {
@@ -23,7 +30,7 @@ class GetTradeAPI
         curl_setopt($curl, CURLOPT_HTTPHEADER, [
 
             'key: ' . $this->key,
-            'sign: ' . hash_hmac('SHA512', null, $this->secret)
+            'sign: ' . \hash_hmac('SHA512', null, $this->secret)
         ]);
         curl_setopt($curl, CURLOPT_POST, 1);
         curl_setopt($curl, CURLOPT_REFERER, true );
