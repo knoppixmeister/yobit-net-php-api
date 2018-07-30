@@ -1,5 +1,7 @@
 # yobit-net-php-api
   Simple PHP yobit.net API / PHP yobit.io API v3.0
+  
+### !!! ITS A PROTOTYPE DO NOT USE FOR PRODUCTION !!!
 
 
   This respository providing assecc for the use API of the crypto-currency exchange platform yobit.net.
